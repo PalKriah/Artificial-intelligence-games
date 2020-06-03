@@ -1,0 +1,38 @@
+<h1>Chess problem:</h1>
+<select
+  class="form-control"
+  name="option"
+  [(ngModel)]="searcher"
+  (change)="onChange()"
+  class="col-md-4"
+>
+  <option value="random">Random search</option>
+  <option value="backtrack">Backtrack</option>
+  <option value="ag-es-korlat">Ág és korlát</option>
+  <option value="width">Width search</option>
+  <option value="depth">Depth search</option>
+  <option value="optimal">Optimal search</option>
+  <option value="best-first">Best-First search</option>
+  <option value="a-algorithm">A algorithm</option>
+</select>
+<div *ngIf="loaded" class="mt-2">
+  <div class="row justify-content-center">
+    <img src="assets/{{ board[0][0] }}.png" alt="" />
+    <img src="assets/{{ board[0][1] }}.png" alt="" />
+    <img src="assets/{{ board[0][2] }}.png" alt="" />
+  </div>
+  <div class="row justify-content-center">
+    <img src="assets/{{ board[1][0] }}.png" alt="" />
+    <img src="assets/{{ board[1][1] }}.png" alt="" />
+    <img src="assets/{{ board[1][2] }}.png" alt="" />
+  </div>
+  <div class="row justify-content-center mt-2">
+    <button class="btn mr-1" (click)="step(-1)">
+      <i class="fas fa-caret-left"></i>
+    </button>
+    <span class="my-auto">{{ currentStep }} / {{ maxStep }}</span>
+    <button class="btn ml-1" (click)="step(+1)">
+      <i class="fas fa-caret-right"></i>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<h1>Board game:</h1>
+<div *ngIf="!started">
+  <span>Would you like to go first?</span>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="first"
+      id="first1"
+      value="0"
+      [(ngModel)]="first"
+      checked
+    />
+    <label class="form-check-label" for="first1">
+      Yes
+    </label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="first"
+      id="first2"
+      value="1"
+      [(ngModel)]="first"
+    />
+    <label class="form-check-label" for="first2">
+      No
+    </label>
+  </div>
+  <span>Choose AI opponent:</span>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="ai"
+      id="ai1"
+      value="mini-max"
+      [(ngModel)]="ai"
+      checked
+    />
+    <label class="form-check-label" for="ai1">
+      MiniMax
+    </label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="ai"
+      id="ai2"
+      value="nega-max"
+      [(ngModel)]="ai"
+    />
+    <label class="form-check-label" for="ai2">
+      NegaMax
+    </label>
+  </div>
+  <button class="btn btn-primary" (click)="start()">Start Game</button>
+</div>
+<div class="row justify-content-center" *ngIf="started">
+  <div class="col-md-6">
+    <div
+      class="row justify-content-center"
+      *ngFor="let item of board; let i = index"
+    >
+      <button
+        class="field"
+        (click)="PlayerPlace(i, j)"
+        [disabled]="done || wait"
+        *ngFor="let item of board[i]; let j = index"
+      >
+        <div
+          [hidden]="board[i][j] == 3"
+          class="token"
+          [ngStyle]="{ background: color(i, j) }"
+        ></div>
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="done" class="mt-2">
+  <p class="text-center">{{ winner }} won the game!</p>
+  <button (click)="start()" class="btn btn-success mx-auto d-block">
+    Restart
+  </button>
+</div>
